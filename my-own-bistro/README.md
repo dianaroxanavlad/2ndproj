@@ -1,19 +1,19 @@
 # My own bistro
 
 ## Introducere
-Aplicatia **My own Bistro** este o aplicatie de tip Single Page Application dezvoltată cu ajutorul librariei React si are rolul de a gasi si salva retete favorite de mancare si cocktailuri. Pentru o interfata cat mai placuta am apelat si la libraria Material UI.
+Aplicația **My own Bistro** este o aplicație de tip Single Page Application dezvoltată cu ajutorul librăriei React și are rolul de a găsi și salva rețete favorite de mâncare și cocktailuri. Pentru o interfață cât mai plăcută, am apelat și la librăria Material UI.
 
-## Descriere problema
-Aceasta aplicatie vine in ajutorul utilizatorilor ce doresc sa gaseasca rapid anumite feluri de mancare sau bauturi. Aplicatia a fost gandita sa fie cat mai usor de folosit, astfel utilizatorii vor avea nevoie doar de un cont de Google pentru autentificare, iar cautarea retetelor se executa prin folosirea unui cuvant cheie. 
+## Descriere problemă
+Această aplicație vine în ajutorul utilizatorilor ce doresc să găsească rapid anumite feluri de mâncare sau băuturi. Aplicația a fost gândită să fie cât mai ușor de folosit, astfel utilizatorii vor avea nevoie doar de un cont de Google pentru autentificare, iar căutarea rețetelor se execută prin folosirea unui cuvânt cheie. 
 
-## Servicii CLoud
-Pentru functionalitatea aplicatiei a fost folosita pltforma cloud Firebase, pentru usurinta de folosire a acesteaia si documentatia complexa pe care o ofera.
+## Servicii Cloud
+Pentru funcționalitatea aplicației, a fost folosită pltforma cloud Firebase, datorită usurinței de folosire a acesteia și documentația complexă pe care o oferă.
 
-1. Firebase Auhentication
-Acest serviciu pune la dispozitie autentificarea rapida prin diferite servicii precum facebook, google, github etc. De asemenea, poate oferi si persistenta autentificarii unui utilizator si poate oferi datele in timp real.
+1. Firebase Authentication
+Acest serviciu pune la dispoziție autentificarea rapidă prin diferite servicii precum Facebook, Google, Github etc. De asemenea, poate oferi și persistența autentificării unui utilizator și poate oferi datele în timp real.
 
 2. Firebase Firestore 
-Acest serviciu este folosit pentru stocarea preferintelor utilizatorilor, felurile de mancare favorite dar si a cocktail-urilor. Structura bazei de data se poate observa in imaginea de mai jos.
+Acest serviciu este folosit pentru stocarea preferințelor utilizatorilor, felurile de mâncare favorite, dar și a cocktail-urilor. Structura bazei de date se poate observa în imaginea de mai jos.
 
 ## REST API
 
