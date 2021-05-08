@@ -17,19 +17,19 @@ Acest serviciu este folosit pentru stocarea preferințelor utilizatorilor, felur
 
 ## REST API
 
-Ambele api-uri sunt free to use si nu este nevoie de o cheie de autentificare. De asemenea pentru apelarea acestora s-a folosit libraria axios. 
+Ambele api-uri sunt free to use și nu este nevoie de o cheie de autentificare. De asemenea, pentru apelarea acestora s-a folosit librăria axios. 
 
 1. TheMealDB
-Acest API se poate regasi aici : https://www.themealdb.com/api.php
-TheMealDB este folosit pentru cautarea retetelor de mancare. Acesta ofera date precum imaginea retetei, ingrediente, reteta, link catre youtube si multe altele. Acesta a fost folosit pentru cautarea felurilor de mancare.
+Acest API se poate regăsi aici: https://www.themealdb.com/api.php
+TheMealDB este folosit pentru căutarea rețetelor de mâncare. Acesta oferă date precum imagine și un link către YouTube cu instrucțiunile de reproducere a acesteia.
 
 2. TheCocktailDB
-Acest api se poate regasi aici: https://www.thecocktaildb.com/api.php
-TheCocktailDb este folosit pentru cautarea bauturilor racoritoare. La fel ca MealDB, ofera informatii similare precum ingrediente, reteta, imagine etc.
+Acest api se poate regăsi aici: https://www.thecocktaildb.com/api.php
+TheCocktailDb este folosit pentru căutarea băuturilor răcoritoare. La fel ca TheMealDB, acesta oferă informații similare, precum imagine și instrucțiuni de utilizare, dar nu și link de YouTube.
 
 ## Flux de date
-Utilizatorul va interactiona prima data cu interfata de autentificare, unde acesta va trebui sa se conecteze cu un cont google. Id-ul acestuia va fi disponibil tuturor componentelor din aplicatie, deoarece se va folosi pentru stocarea preferintelor. Odata autentificat, acesta va observa pagina de cocktails, unde poate cauta o bautura dupa un cuvant cheie. 
-Datele sunt preluate din API-ul TheCocktailDb, iar un apel de tip `GET` catre acesta va arata in felul urmator: 
+Utilizatorul va interacționa prima dată cu interfața de autentificare, unde acesta va trebui să se conecteze cu un cont Google. Id-ul acestuia va fi disponibil tuturor componentelor din aplicație, deoarece se va folosi pentru stocarea preferințelor. Odată autentificat, acesta va observa pagina de cocktails, unde poate căuta și alege să adauge la favorite o băutură după un cuvânt cheie. 
+Datele sunt preluate din API-ul TheCocktailDb, iar un apel de tip `GET` către acesta va arăta in felul urmator: 
 ```
  const searchCocktails = () =>{
         axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php', {
@@ -41,11 +41,11 @@ Datele sunt preluate din API-ul TheCocktailDb, iar un apel de tip `GET` catre ac
           })
     }
 ```
-Unde 's' este un parametru ce reprezinta cuvantul cheie. Datele vor fi stocate intr-un vector si afisate prin componenta `CocktailCard`.
+Unde 's' este un parametru ce reprezintă cuvântul cheie. Datele vor fi stocate într-un vector și afișate prin componenta `CocktailCard`.
 
 Un exemplu de response poate fi vizualizat aici: https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
 
-Utilizatorul poate accesa interfata de feluri de mancare, deschizand meniul lateral. Similar cu interfata de cocktails, felurile de mancare vor fi cautate dupa un cuvant cheie. Metoda `GET` arata in felul urmator: 
+Utilizatorul poate accesa interfața de feluri de mâncare, deschizând meniul lateral. Similar cu interfața de cocktails, felurile de mâncare vor fi căutate după un cuvânt cheie. Metoda `GET` în acest caz arată în felul următor: 
 ```
    const searchMeals = () =>{
         axios.get('https://www.themealdb.com/api/json/v1/1/search.php', {
@@ -57,9 +57,9 @@ Utilizatorul poate accesa interfata de feluri de mancare, deschizand meniul late
           })
     }
 ```
-Textul va fi preluat din input si 'pasat' catre parametrul `s`.Datele vor fi stocate intr-un vector si afisate prin componenta `MealCard`.
+Textul va fi preluat din input și 'pasat' către parametrul `s`.Datele vor fi stocate într-un vector și afișate prin componenta `MealCard`.
 
-Ulterior, pentru a deschide pagina cu produsele salvate, se va accesa optiunea 'My Bistro'. Odata deschisa interfata, se vor citi din baza de date toate felurile de mancare si bauturile stocate. Aici Firebase vine in ajutor cu propriile metode de apel. Citirea pentru felurile de mancare se va face in felul urmator: 
+Ulterior, pentru a deschide pagina cu produsele salvate, se va accesa opțiunea 'My Bistro'. Odată deschisă interfața, se vor citi din baza de date toate felurile de mâncare și băuturile stocate. Aici Firebase vine în ajutor cu propriile metode de apel. Citirea pentru felurile de mâncare se va face în felul următor: 
 ```
     const getMeals = () =>{
         database.collection("users").doc(currentUserId).get().then((doc) => {
@@ -71,7 +71,7 @@ Ulterior, pentru a deschide pagina cu produsele salvate, se va accesa optiunea '
         })
     }
 ```
-Pentru eficienta codului, se vor refolosi componentele `MealCard` si `CocktailCard`. De asemnea din aceasta interfata utilizatorul poate sterge obiectele din favorite. 
+Pentru eficiența codului, se vor refolosi componentele `MealCard` și `CocktailCard`. De asemnea, din această interfață utilizatorul poate șterge obiectele din favorite. 
 ```
  const removeMealFromFav = (meal) => {
         database.collection("users").doc(currentUserId).update({
@@ -85,7 +85,7 @@ Pentru eficienta codului, se vor refolosi componentele `MealCard` si `CocktailCa
         });
     }
 ```
-De asemenea pentru autentificare se va folosi urmatorul apel:
+De asemenea, pentru autentificare se va folosi urmatorul apel:
 ```
 const authenticateUser = () => {
         auth.signInWithPopup(googleProvider).then(res => {
@@ -99,10 +99,10 @@ const authenticateUser = () => {
         });
     }
 ```
-Daca utilizatorul este pentru prima oara autentificat se vor crea vectorii pentru felul de mancare si bauturi in documentul propriu.
+Daca utilizatorul este pentru prima oară autentificat, se vor crea vectorii pentru felul de mâncare și băuturi în documentul propriu.
 
 ## Publicarea
-Aplicatia a fost publicata folosind Heroku CLI si poate fi accesata aici: https://my-own-bistro.herokuapp.com/
+Aplicatia a fost publicata folosind Heroku CLI și poate fi accesată aici: https://my-own-bistro.herokuapp.com/
 
 ## Rularea locala
 Pentru a rula proiectul local, se vor folosi comenzile:
@@ -112,9 +112,9 @@ cd my-own-bistro
 npm install
 npm start
 ```
-Pentru siguranta, proiectul foloseste un fisier local .env.local unde vor fi stocate cheile catre firebase. Fara acest fisier, proiectul nu va functiona corespunzator.
+Pentru siguranță, proiectul folosește un fișier local .env.local unde vor fi stocate cheile către firebase. Fără acest fișier, proiectul nu va funcționa corespunzător.
 
-## Referinte
+## Referințe
 1. https://firebase.google.com/docs/auth
 2. https://firebase.google.com/docs/firestore
 3. https://www.themealdb.com/api.php
