@@ -7,7 +7,7 @@ Aplicația **My own Bistro** este o aplicație de tip Single Page Application de
 Această aplicație vine în ajutorul utilizatorilor ce doresc să găsească rapid anumite feluri de mâncare sau băuturi. Aplicația a fost gândită să fie cât mai ușor de folosit, astfel utilizatorii vor avea nevoie doar de un cont de Google pentru autentificare, iar căutarea rețetelor se execută prin folosirea unui cuvânt cheie. 
 
 ## Servicii Cloud
-Pentru funcționalitatea aplicației, a fost folosită pltforma cloud Firebase, datorită usurinței de folosire a acesteia și documentația complexă pe care o oferă.
+Pentru funcționalitatea aplicației, a fost folosită platforma cloud Firebase, datorită usurinței de folosire a acesteia și documentația complexă pe care o oferă.
 
 1. Firebase Authentication
 Acest serviciu pune la dispoziție autentificarea rapidă prin diferite servicii precum Facebook, Google, Github etc. De asemenea, poate oferi și persistența autentificării unui utilizator și poate oferi datele în timp real.
