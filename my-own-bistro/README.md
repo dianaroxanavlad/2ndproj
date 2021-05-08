@@ -1,7 +1,7 @@
 # My own bistro
 
 ## Introducere
-Aplicatia **My own Bistro** este o aplicatie de tip Single Page Application dezvoltata cu ajutorul librariei React si are rolul de a gasi si salva retete favorite de mancare si cocktailuri. Pentru o interfata cat mai placuta am apelat si la libraria Material UI.
+Aplicatia **My own Bistro** este o aplicatie de tip Single Page Application dezvoltată cu ajutorul librariei React si are rolul de a gasi si salva retete favorite de mancare si cocktailuri. Pentru o interfata cat mai placuta am apelat si la libraria Material UI.
 
 ## Descriere problema
 Aceasta aplicatie vine in ajutorul utilizatorilor ce doresc sa gaseasca rapid anumite feluri de mancare sau bauturi. Aplicatia a fost gandita sa fie cat mai usor de folosit, astfel utilizatorii vor avea nevoie doar de un cont de Google pentru autentificare, iar cautarea retetelor se executa prin folosirea unui cuvant cheie. 
