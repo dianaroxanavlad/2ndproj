@@ -29,7 +29,7 @@ export const SignIn = ( { setCurrentUserId } ) => {
         auth.signInWithPopup(googleProvider).then(res => {
             const userId = res.additionalUserInfo.profile.id;
             if (res.additionalUserInfo.isNewUser) {
-                createMealsArray(userId);
+                createMealsAndCocktailsArray(userId);
             }
             setCurrentUserId(userId);
         }).catch(err => {
@@ -37,9 +37,10 @@ export const SignIn = ( { setCurrentUserId } ) => {
         });
     }
 
-   const createMealsArray = (userId) => {
+   const createMealsAndCocktailsArray = (userId) => {
         database.collection("users").doc(userId).set({
-            meals: []
+            meals: [],
+            cocktails: []
         })
         .then((docRef) => {
             console.log('User logged in');

@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function App() {
 
-  const [currentUserId, setCurrentUserId] = useState('null');
+  const [currentUserId, setCurrentUserId] = useState('104045957173342154161');
 
   return (
     <div className="App">

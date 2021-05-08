@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import DrawerMenu from '../Drawer/Drawer'
 import { MealsPage } from '../MealsPage/MealsPage';
+import { CocktailsPage } from '../CocktailsPage/CocktailsPage';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-export const Dashboard = () => {
+export const Dashboard = ({currentUserId}) => {
 
     const [currentPage, setCurrentPage] = useState('cocktails');
     const [isDrawerOpened, setDrawerOpened] = useState(false);
@@ -35,10 +36,10 @@ export const Dashboard = () => {
 
     if (currentPage) {
         if (currentPage === 'cocktails') {
-            renderedPage = <h1>Cocktails</h1>
+            renderedPage = <CocktailsPage currentUserId={currentUserId}/>
         }
         if (currentPage === 'meals') {
-            renderedPage = <MealsPage/>
+            renderedPage = <MealsPage currentUserId={currentUserId}/>
         }
         if (currentPage === 'bistro') {
             renderedPage = <h1>Bistro</h1>
