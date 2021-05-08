@@ -123,3 +123,8 @@ Pentru siguranta, proiectul foloseste un fisier local .env.local unde vor fi sto
 6. https://material-ui.com/
 
 ## Capturi de ecran
+https://github.com/dianaroxanavlad/my-own-bistro/blob/main/my-own-bistro/Screenshot%202021-05-08%20at%2020.33.54.png
+https://github.com/dianaroxanavlad/my-own-bistro/blob/main/my-own-bistro/Screenshot%202021-05-08%20at%2021.11.07.png
+https://github.com/dianaroxanavlad/my-own-bistro/blob/main/my-own-bistro/Screenshot%202021-05-08%20at%2021.11.15.png
+https://github.com/dianaroxanavlad/my-own-bistro/blob/main/my-own-bistro/Screenshot%202021-05-08%20at%2021.11.30.png
+https://github.com/dianaroxanavlad/my-own-bistro/blob/main/my-own-bistro/Screenshot%202021-05-08%20at%2021.11.49.png
