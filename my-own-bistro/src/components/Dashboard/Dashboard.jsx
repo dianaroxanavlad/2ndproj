@@ -10,6 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import DrawerMenu from '../Drawer/Drawer'
 import { MealsPage } from '../MealsPage/MealsPage';
 import { CocktailsPage } from '../CocktailsPage/CocktailsPage';
+import { BistroPage } from '../BistroPage/BistroPage';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-export const Dashboard = ({currentUserId}) => {
+export const Dashboard = ({currentUserId, setCurrentUserId}) => {
 
     const [currentPage, setCurrentPage] = useState('cocktails');
     const [isDrawerOpened, setDrawerOpened] = useState(false);
@@ -42,8 +43,12 @@ export const Dashboard = ({currentUserId}) => {
             renderedPage = <MealsPage currentUserId={currentUserId}/>
         }
         if (currentPage === 'bistro') {
-            renderedPage = <h1>Bistro</h1>
+            renderedPage = <BistroPage currentUserId={currentUserId}/>
         }
+    }
+
+    const logOutUser = () => {
+        setCurrentUserId(null);
     }
 
     const classes = useStyles();
@@ -57,7 +62,7 @@ export const Dashboard = ({currentUserId}) => {
             <Typography variant="h6" className={classes.title}>
                 My own bistro!
             </Typography>
-            <Button color="inherit">Logout</Button>
+            <Button onClick={() => logOutUser()}color="inherit">Logout</Button>
             </Toolbar>
             <DrawerMenu isDrawerOpened={isDrawerOpened} toggleDrawer={toggleDrawer} setPage={setCurrentPage}/>
         </AppBar>

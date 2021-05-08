@@ -1,12 +1,11 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { SignIn } from './components/SignIn/SignIn';
 import { Dashboard } from './components/Dashboard/Dashboard'
-import axios from 'axios';
 
 function App() {
 
-  const [currentUserId, setCurrentUserId] = useState('104045957173342154161');
+  const [currentUserId, setCurrentUserId] = useState(null);
 
   return (
     <div className="App">

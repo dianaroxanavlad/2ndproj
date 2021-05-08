@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# My own bistro
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introducere
+Aplicatia **My own Bistro** este o aplicatie de tip Single Page Application dezvoltata cu ajutorul librariei React si are rolul de a gasi si salva retete favorite de mancare si cocktailuri. Pentru o interfata cat mai placuta am apelat si la libraria Material UI.
 
-## Available Scripts
+## Descriere problema
+Aceasta aplicatie vine in ajutorul utilizatorilor ce doresc sa gaseasca rapid anumite feluri de mancare sau bauturi. Aplicatia a fost gandita sa fie cat mai usor de folosit, astfel utilizatorii vor avea nevoie doar de un cont de Google pentru autentificare, iar cautarea retetelor se executa prin folosirea unui cuvant cheie. 
 
-In the project directory, you can run:
+## Servicii CLoud
+Pentru functionalitatea aplicatiei a fost folosita pltforma cloud Firebase, pentru usurinta de folosire a acesteaia si documentatia complexa pe care o ofera.
 
-### `npm start`
+1. Firebase Auhentication
+Acest serviciu pune la dispozitie autentificarea rapida prin diferite servicii precum facebook, google, github etc. De asemenea, poate oferi si persistenta autentificarii unui utilizator si poate oferi datele in timp real.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. Firebase Firestore 
+Acest serviciu este folosit pentru stocarea preferintelor utilizatorilor, felurile de mancare favorite dar si a cocktail-urilor. Structura bazei de data se poate observa in imaginea de mai jos.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## REST API
 
-### `npm test`
+Ambele api-uri sunt free to use si nu este nevoie de o cheie de autentificare. De asemenea pentru apelarea acestora s-a folosit libraria axios. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. TheMealDB
+Acest API se poate regasi aici : https://www.themealdb.com/api.php
+TheMealDB este folosit pentru cautarea retetelor de mancare. Acesta ofera date precum imaginea retetei, ingrediente, reteta, link catre youtube si multe altele. Acesta a fost folosit pentru cautarea felurilor de mancare.
 
-### `npm run build`
+2. TheCocktailDB
+Acest api se poate regasi aici: https://www.thecocktaildb.com/api.php
+TheCocktailDb este folosit pentru cautarea bauturilor racoritoare. La fel ca MealDB, ofera informatii similare precum ingrediente, reteta, imagine etc.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Flux de date
+Utilizatorul va interactiona prima data cu interfata de autentificare, unde acesta va trebui sa se conecteze cu un cont google. Id-ul acestuia va fi disponibil tuturor componentelor din aplicatie, deoarece se va folosi pentru stocarea preferintelor. Odata autentificat, acesta va observa pagina de cocktails, unde poate cauta o bautura dupa un cuvant cheie. 
+Datele sunt preluate din API-ul TheCocktailDb, iar un apel de tip `GET` catre acesta va arata in felul urmator: 
+```
+ const searchCocktails = () =>{
+        axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php', {
+            params: {
+              s: cocktailInput
+            } 
+          }).then(res => {
+            setCocktails(res.data.drinks);
+          })
+    }
+```
+Unde 's' este un parametru ce reprezinta cuvantul cheie. Datele vor fi stocate intr-un vector si afisate prin componenta `CocktailCard`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Un exemplu de response poate fi vizualizat aici: https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Utilizatorul poate accesa interfata de feluri de mancare, deschizand meniul lateral. Similar cu interfata de cocktails, felurile de mancare vor fi cautate dupa un cuvant cheie. Metoda `GET` arata in felul urmator: 
+```
+   const searchMeals = () =>{
+        axios.get('https://www.themealdb.com/api/json/v1/1/search.php', {
+            params: {
+              s: mealInput
+            } 
+          }).then(res => {
+            setMeals(res.data.meals);
+          })
+    }
+```
+Textul va fi preluat din input si 'pasat' catre parametrul `s`.Datele vor fi stocate intr-un vector si afisate prin componenta `MealCard`.
 
-### `npm run eject`
+Ulterior, pentru a deschide pagina cu produsele salvate, se va accesa optiunea 'My Bistro'. Odata deschisa interfata, se vor citi din baza de date toate felurile de mancare si bauturile stocate. Aici Firebase vine in ajutor cu propriile metode de apel. Citirea pentru felurile de mancare se va face in felul urmator: 
+```
+    const getMeals = () =>{
+        database.collection("users").doc(currentUserId).get().then((doc) => {
+            if (doc.exists) {
+                setMeals(doc.data().meals);
+            } else {
+                console.log("No such document!");
+            }
+        })
+    }
+```
+Pentru eficienta codului, se vor refolosi componentele `MealCard` si `CocktailCard`. De asemnea din aceasta interfata utilizatorul poate sterge obiectele din favorite. 
+```
+ const removeMealFromFav = (meal) => {
+        database.collection("users").doc(currentUserId).update({
+            meals: firebase.firestore.FieldValue.arrayRemove(meal)
+        })
+        .then((docRef) => {  
+            setMeals( meals.filter(elem => elem.idMeal !== meal.idMeal));
+        })
+        .catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    }
+```
+De asemenea pentru autentificare se va folosi urmatorul apel:
+```
+const authenticateUser = () => {
+        auth.signInWithPopup(googleProvider).then(res => {
+            const userId = res.additionalUserInfo.profile.id;
+            if (res.additionalUserInfo.isNewUser) {
+                createMealsAndCocktailsArray(userId);
+            }
+            setCurrentUserId(userId);
+        }).catch(err => {
+            alert('Error while logging in');
+        });
+    }
+```
+Daca utilizatorul este pentru prima oara autentificat se vor crea vectorii pentru felul de mancare si bauturi in documentul propriu.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Publicarea
+Aplicatia a fost publicata folosind Heroku CLI si poate fi accesata aici: https://my-own-bistro.herokuapp.com/
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Rularea locala
+Pentru a rula proiectul local, se vor folosi comenzile:
+```
+git clone /insert repository/
+cd my-own-bistro
+npm install
+npm start
+```
+Pentru siguranta, proiectul foloseste un fisier local .env.local unde vor fi stocate cheile catre firebase. Fara acest fisier, proiectul nu va functiona corespunzator.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Referinte
+1. https://firebase.google.com/docs/auth
+2. https://firebase.google.com/docs/firestore
+3. https://www.themealdb.com/api.php
+4. https://www.thecocktaildb.com/api.php
+5. https://www.npmjs.com/package/axios
+6. https://material-ui.com/
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Capturi de ecran

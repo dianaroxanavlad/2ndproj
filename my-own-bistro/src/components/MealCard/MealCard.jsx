@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloseIcon from '@material-ui/icons/Close'
-import { Button, CardHeader, Link, Snackbar } from '@material-ui/core';
+import { CardHeader, Link, Snackbar } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,12 +24,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MealCard({ meal, addToBistro, removeFromBistro}) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [message, setMessage] = React.useState('');
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
 
  const addToFavorites = () => {
      openSnackBar('Image added to favorites');
      let mealToSave = {
+         idMeal: meal.idMeal,
          strMeal: meal.strMeal,
          strMealThumb: meal.strMealThumb,
          strYoutube: meal.strYoutube
@@ -64,9 +63,18 @@ export default function MealCard({ meal, addToBistro, removeFromBistro}) {
       <div>
     <Card className={classes.root}>
         <CardHeader action={ 
-            <IconButton onClick={() => addToFavorites()} aria-label="add to favorites">
-                    <AddCircleOutlineIcon color="primary" />
-            </IconButton>}
+
+          addToBistro ? 
+          ( <IconButton onClick={() => addToFavorites()} aria-label="add to favorites">
+          <AddCircleOutlineIcon color="primary" />
+          </IconButton>)
+          :
+          ( <IconButton onClick={() => removeFromFavorites()} aria-label="Remove from favorites">
+              <DeleteIcon color="primary" />
+              </IconButton>)
+
+
+           }
             title={<Typography variant="h6" color="textSecondary" >
               {meal.strMeal}
           </Typography>}>
@@ -82,8 +90,6 @@ export default function MealCard({ meal, addToBistro, removeFromBistro}) {
             Learn how to cook it
          </Link>
       </CardContent>
-
-     
 
     </Card>
      <Snackbar
