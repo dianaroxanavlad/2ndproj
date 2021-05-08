@@ -14,6 +14,7 @@ Acest serviciu pune la dispoziție autentificarea rapidă prin diferite servicii
 
 2. Firebase Firestore 
 Acest serviciu este folosit pentru stocarea preferințelor utilizatorilor, felurile de mâncare favorite, dar și a cocktail-urilor. Structura bazei de date se poate observa în imaginea de mai jos.
+https://github.com/dianaroxanavlad/my-own-bistro/blob/main/my-own-bistro/Screenshot%202021-05-08%20at%2020.33.54.png
 
 ## REST API
 
