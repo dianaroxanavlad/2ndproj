@@ -24,7 +24,7 @@ Ambele api-uri sunt free to use și nu este nevoie de o cheie de autentificare. 
 1. TheMealDB
 Acest API se poate regăsi aici: https://www.themealdb.com/api.php
 TheMealDB este folosit pentru căutarea rețetelor de mâncare. Acesta oferă date precum imagine și un link către YouTube cu instrucțiunile de reproducere a acesteia.
-![meal image](https://user-images.githubusercontent.com/83305311/117572976-2c749c00-b0de-11eb-88e7-feb85321d2ea.JPG) ![meal youtube link](https://user-images.githubusercontent.com/83305311/117573004-54fc9600-b0de-11eb-9f60-97a1325a13fe.JPG)
+![meal image](https://user-images.githubusercontent.com/83305311/117572976-2c749c00-b0de-11eb-88e7-feb85321d2ea.JPG) ![meal youtube link](https://user-images.githubusercontent.com/83305311/117573365-1cf65280-b0e0-11eb-987e-fc3da67b78b4.JPG)
 
 2. TheCocktailDB
 Acest api se poate regăsi aici: https://www.thecocktaildb.com/api.php
