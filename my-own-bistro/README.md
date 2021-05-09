@@ -36,7 +36,7 @@ Utilizatorul va interacționa prima dată cu interfața de autentificare, unde a
 ![pagina de start](https://user-images.githubusercontent.com/83305311/117572791-3053ee80-b0dd-11eb-9ab2-7e20e3fe70a4.JPG)
 
 În cadrul acestei pagini, utilizatorul poate căuta și alege să adauge la favorite o băutură după un cuvânt cheie.
-
+![plus](https://user-images.githubusercontent.com/83305311/117573084-bde40e00-b0de-11eb-97f5-d417c1f38a50.JPG)
 
 Datele sunt preluate din API-ul TheCocktailDb, iar un apel de tip `GET` către acesta va arăta in felul urmator: 
 ```
@@ -55,7 +55,13 @@ Unde 's' este un parametru ce reprezintă cuvântul cheie. Datele vor fi stocate
 Un exemplu de response poate fi vizualizat aici: https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
 ![drink response](https://user-images.githubusercontent.com/83305311/117572848-8163e280-b0dd-11eb-828e-94577d8e2477.JPG)
 
-Utilizatorul poate accesa interfața de feluri de mâncare, deschizând meniul lateral. Similar cu interfața de cocktails, felurile de mâncare vor fi căutate după un cuvânt cheie. Metoda HTTP `GET` în acest caz arată în felul următor: 
+Utilizatorul poate accesa interfața de feluri de mâncare, deschizând meniul lateral. 
+![meniu lateral](https://user-images.githubusercontent.com/83305311/117573114-e0762700-b0de-11eb-85a1-2bafcd58a955.JPG)
+
+Similar cu interfața de cocktails, felurile de mâncare vor fi căutate după un cuvânt cheie. 
+![meal cuv cheie](https://user-images.githubusercontent.com/83305311/117573142-08658a80-b0df-11eb-9f45-ed62f32e7f6b.JPG)
+
+Metoda HTTP `GET` în acest caz arată în felul următor: 
 ```
    const searchMeals = () =>{
         axios.get('https://www.themealdb.com/api/json/v1/1/search.php', {
@@ -69,7 +75,13 @@ Utilizatorul poate accesa interfața de feluri de mâncare, deschizând meniul l
 ```
 Textul va fi preluat din input și 'pasat' către parametrul `s`.Datele vor fi stocate într-un vector și afișate prin componenta `MealCard`.
 
-Ulterior, pentru a deschide pagina cu produsele salvate, se va accesa opțiunea 'My Bistro'. Odată deschisă interfața, se vor citi din baza de date toate felurile de mâncare și băuturile stocate. Aici Firebase vine în ajutor cu propriile metode de apel. Citirea pentru felurile de mâncare se va face în felul următor: 
+Ulterior, pentru a deschide pagina cu produsele salvate, se va accesa opțiunea 'My Bistro' din meniul lateral. 
+![meniu lateral 2](https://user-images.githubusercontent.com/83305311/117573228-66926d80-b0df-11eb-8286-af8775f5663a.JPG)
+
+Odată deschisă interfața, se vor citi din baza de date toate felurile de mâncare și băuturile stocate. 
+![my bistro](https://user-images.githubusercontent.com/83305311/117573259-8fb2fe00-b0df-11eb-8ddf-9ec7377da772.JPG)
+
+Aici Firebase vine în ajutor cu propriile metode de apel. Citirea pentru felurile de mâncare se va face în felul următor: 
 ```
     const getMeals = () =>{
         database.collection("users").doc(currentUserId).get().then((doc) => {
@@ -95,7 +107,10 @@ Pentru eficiența codului, se vor refolosi componentele `MealCard` și `Cocktail
         });
     }
 ```
-De asemenea, pentru autentificare se va folosi urmatorul apel:
+De asemnea, din această interfață utilizatorul poate șterge obiectele din favorite. 
+![trash](https://user-images.githubusercontent.com/83305311/117573247-7dd15b00-b0df-11eb-899b-bce202bae963.JPG)
+
+De asemenea, pentru autentificare se folosește urmatorul apel:
 ```
 const authenticateUser = () => {
         auth.signInWithPopup(googleProvider).then(res => {
@@ -110,6 +125,9 @@ const authenticateUser = () => {
     }
 ```
 Daca utilizatorul este pentru prima oară autentificat, se vor crea vectorii pentru felul de mâncare și băuturi în documentul propriu.
+
+Pentru a ieși din aplicație, utilizatorul va apăsa butonul de LOGOUT din partea dreapta-sus a aplicației. De asemenea, data viitoare cand utilizatorul va accesa aplicația cu același cont, va outea observa alegerile făcute înainte, altfe, pagina My Bistro va fi goală.
+![logout](https://user-images.githubusercontent.com/83305311/117573320-e15b8880-b0df-11eb-93bf-2dd0587fddab.JPG)
 
 ## Publicarea
 Aplicatia a fost publicata folosind Heroku CLI și poate fi accesată aici: https://my-own-bistro.herokuapp.com/
