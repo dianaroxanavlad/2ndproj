@@ -11,25 +11,33 @@ Pentru funcționalitatea aplicației, a fost folosită platforma cloud Firebase,
 
 1. Firebase Authentication
 Acest serviciu pune la dispoziție autentificarea rapidă prin diferite servicii precum Facebook, Google, Github etc. De asemenea, poate oferi și persistența autentificării unui utilizator și poate oferi datele în timp real.
+![autentificare](https://user-images.githubusercontent.com/83305311/117572521-e7e80100-b0db-11eb-8078-ec100fed05f4.JPG)
 
 2. Firebase Firestore 
 Acest serviciu este folosit pentru stocarea preferințelor utilizatorilor, felurile de mâncare favorite, dar și a cocktail-urilor. Structura bazei de date se poate observa în imaginea de mai jos.
-https://github.com/dianaroxanavlad/my-own-bistro/blob/main/my-own-bistro/Screenshot%202021-05-08%20at%2020.33.54.png
+![structura baza de date](https://user-images.githubusercontent.com/83305311/117572755-f97dd880-b0dc-11eb-902d-35857f0fd4b2.JPG)
 
 ## REST API
 
-Ambele api-uri sunt free to use și nu este nevoie de o cheie de autentificare. De asemenea, pentru apelarea acestora s-a folosit librăria axios. 
+Ambele api-uri sunt free to use și nu este nevoie de o cheie de autentificare. De asemenea, pentru apelarea acestora s-a folosit librăria Axios. 
 
 1. TheMealDB
 Acest API se poate regăsi aici: https://www.themealdb.com/api.php
 TheMealDB este folosit pentru căutarea rețetelor de mâncare. Acesta oferă date precum imagine și un link către YouTube cu instrucțiunile de reproducere a acesteia.
+![meal image](https://user-images.githubusercontent.com/83305311/117572976-2c749c00-b0de-11eb-88e7-feb85321d2ea.JPG) ![meal youtube link](https://user-images.githubusercontent.com/83305311/117573004-54fc9600-b0de-11eb-9f60-97a1325a13fe.JPG)
 
 2. TheCocktailDB
 Acest api se poate regăsi aici: https://www.thecocktaildb.com/api.php
 TheCocktailDb este folosit pentru căutarea băuturilor răcoritoare. La fel ca TheMealDB, acesta oferă informații similare, precum imagine și instrucțiuni de utilizare, dar nu și link de YouTube.
+![drink imagine](https://user-images.githubusercontent.com/83305311/117572958-0c44dd00-b0de-11eb-85c7-7569448045eb.JPG) 
 
 ## Flux de date
-Utilizatorul va interacționa prima dată cu interfața de autentificare, unde acesta va trebui să se conecteze cu un cont Google. Id-ul acestuia va fi disponibil tuturor componentelor din aplicație, deoarece se va folosi pentru stocarea preferințelor. Odată autentificat, acesta va observa pagina de cocktails, unde poate căuta și alege să adauge la favorite o băutură după un cuvânt cheie. 
+Utilizatorul va interacționa prima dată cu interfața de autentificare, unde acesta va trebui să se conecteze cu un cont Google. Id-ul acestuia va fi disponibil tuturor componentelor din aplicație, deoarece se va folosi pentru stocarea preferințelor. Odată autentificat, acesta va observa pagina de cocktails. 
+![pagina de start](https://user-images.githubusercontent.com/83305311/117572791-3053ee80-b0dd-11eb-9ab2-7e20e3fe70a4.JPG)
+
+În cadrul acestei pagini, utilizatorul poate căuta și alege să adauge la favorite o băutură după un cuvânt cheie.
+
+
 Datele sunt preluate din API-ul TheCocktailDb, iar un apel de tip `GET` către acesta va arăta in felul urmator: 
 ```
  const searchCocktails = () =>{
@@ -45,8 +53,9 @@ Datele sunt preluate din API-ul TheCocktailDb, iar un apel de tip `GET` către a
 Unde 's' este un parametru ce reprezintă cuvântul cheie. Datele vor fi stocate într-un vector și afișate prin componenta `CocktailCard`.
 
 Un exemplu de response poate fi vizualizat aici: https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
+![drink response](https://user-images.githubusercontent.com/83305311/117572848-8163e280-b0dd-11eb-828e-94577d8e2477.JPG)
 
-Utilizatorul poate accesa interfața de feluri de mâncare, deschizând meniul lateral. Similar cu interfața de cocktails, felurile de mâncare vor fi căutate după un cuvânt cheie. Metoda `GET` în acest caz arată în felul următor: 
+Utilizatorul poate accesa interfața de feluri de mâncare, deschizând meniul lateral. Similar cu interfața de cocktails, felurile de mâncare vor fi căutate după un cuvânt cheie. Metoda HTTP `GET` în acest caz arată în felul următor: 
 ```
    const searchMeals = () =>{
         axios.get('https://www.themealdb.com/api/json/v1/1/search.php', {
