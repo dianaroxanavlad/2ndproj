@@ -23,12 +23,16 @@ Ambele api-uri sunt free to use și nu este nevoie de o cheie de autentificare. 
 
 1. TheMealDB
 Acest API se poate regăsi aici: https://www.themealdb.com/api.php
+
 TheMealDB este folosit pentru căutarea rețetelor de mâncare. Acesta oferă date precum imagine și un link către YouTube cu instrucțiunile de reproducere a acesteia.
+
 ![meal image](https://user-images.githubusercontent.com/83305311/117572976-2c749c00-b0de-11eb-88e7-feb85321d2ea.JPG) ![meal youtube link](https://user-images.githubusercontent.com/83305311/117573391-38615d80-b0e0-11eb-80c6-eed307ad932e.JPG)
 
 2. TheCocktailDB
-Acest api se poate regăsi aici: https://www.thecocktaildb.com/api.php
+Acest api se poate regăsi aici: https://www.thecocktaildb.com/api.php.
+
 TheCocktailDb este folosit pentru căutarea băuturilor răcoritoare. La fel ca TheMealDB, acesta oferă informații similare, precum imagine și instrucțiuni de utilizare, dar nu și link de YouTube.
+
 ![drink imagine](https://user-images.githubusercontent.com/83305311/117572958-0c44dd00-b0de-11eb-85c7-7569448045eb.JPG) 
 
 ## Flux de date
@@ -56,6 +60,7 @@ Un exemplu de response poate fi vizualizat aici: https://www.themealdb.com/api/j
 ![drink response](https://user-images.githubusercontent.com/83305311/117572848-8163e280-b0dd-11eb-828e-94577d8e2477.JPG)
 
 Utilizatorul poate accesa interfața de feluri de mâncare, deschizând meniul lateral. 
+
 ![meniu lateral](https://user-images.githubusercontent.com/83305311/117573114-e0762700-b0de-11eb-85a1-2bafcd58a955.JPG)
 
 Similar cu interfața de cocktails, felurile de mâncare vor fi căutate după un cuvânt cheie. 
@@ -93,7 +98,7 @@ Aici Firebase vine în ajutor cu propriile metode de apel. Citirea pentru feluri
         })
     }
 ```
-Pentru eficiența codului, se vor refolosi componentele `MealCard` și `CocktailCard`. De asemnea, din această interfață utilizatorul poate șterge obiectele din favorite. 
+Pentru eficiența codului, se vor refolosi componentele `MealCard` și `CocktailCard`.
 ```
  const removeMealFromFav = (meal) => {
         database.collection("users").doc(currentUserId).update({
@@ -108,6 +113,7 @@ Pentru eficiența codului, se vor refolosi componentele `MealCard` și `Cocktail
     }
 ```
 De asemnea, din această interfață utilizatorul poate șterge obiectele din favorite. 
+
 ![trash](https://user-images.githubusercontent.com/83305311/117573247-7dd15b00-b0df-11eb-899b-bce202bae963.JPG)
 
 De asemenea, pentru autentificare se folosește urmatorul apel:
