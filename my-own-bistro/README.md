@@ -132,7 +132,7 @@ const authenticateUser = () => {
 ```
 Daca utilizatorul este pentru prima oară autentificat, se vor crea vectorii pentru felul de mâncare și băuturi în documentul propriu.
 
-Pentru a ieși din aplicație, utilizatorul va apăsa butonul de LOGOUT din partea dreapta-sus a aplicației. De asemenea, data viitoare cand utilizatorul va accesa aplicația cu același cont, va outea observa alegerile făcute înainte, altfe, pagina My Bistro va fi goală.
+Pentru a ieși din aplicație, utilizatorul va apăsa butonul de LOGOUT din partea dreapta-sus a aplicației. De asemenea, data viitoare cand utilizatorul va accesa aplicația cu același cont, va outea vedea alegerile făcute înainte, altfel, pagina My Bistro va fi goală.
 ![logout](https://user-images.githubusercontent.com/83305311/117573320-e15b8880-b0df-11eb-93bf-2dd0587fddab.JPG)
 
 ## Publicarea
@@ -156,7 +156,7 @@ Pentru siguranță, proiectul folosește un fișier local .env.local unde vor fi
 5. https://www.npmjs.com/package/axios
 6. https://material-ui.com/
 
-## Capturi de ecran
+## Alte capturi de ecran
 https://github.com/dianaroxanavlad/my-own-bistro/blob/main/my-own-bistro/Screenshot%202021-05-08%20at%2020.33.54.png
 https://github.com/dianaroxanavlad/my-own-bistro/blob/main/my-own-bistro/Screenshot%202021-05-08%20at%2021.11.07.png
 https://github.com/dianaroxanavlad/my-own-bistro/blob/main/my-own-bistro/Screenshot%202021-05-08%20at%2021.11.15.png
